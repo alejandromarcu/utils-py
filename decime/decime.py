@@ -8,10 +8,8 @@ from tempfile import gettempdir
 import time
 import re
 
-save_path = "C:\\Cucu\\tmp\\wiktionary"
+save_path = os.path.join("decime", "audio")
 is_az = re.compile("[a-zA-Z]*")
-lang = "Ru"
-
 
 def get_audio_from_wiktionary(lang, word):
     url = "https://commons.wikimedia.org/w/index.php?title=File%3A{}-{}.ogg".format(lang, word)
@@ -29,6 +27,11 @@ def get_audio_from_wiktionary(lang, word):
 
     return r.content
 
+
+if not os.path.exists(save_path):
+    os.mkdir(save_path)
+
+
 while True:
     word = input("Word: ")
 
@@ -37,7 +40,7 @@ while True:
 
     if is_az.match(word).span() == (0, 0):
         lang = "Ru"
-        no_accents = word.encode().replace(b'\xcc\x81',b'').decode()
+        no_accents = word.encode().replace(b'\xcc\x81', b'').decode()
         if word != no_accents:
             word = no_accents
             print("Accents removed: " + word)
@@ -46,12 +49,16 @@ while True:
         word = word.lower()
 
     audio = get_audio_from_wiktionary(lang, word)
-   
+ 
     if not audio:
         print("Can't find the entry for {}".format(word))
         continue
 
-    filename = "{}\\{}.mp3".format(save_path, word)
+    save_path_with_lang = os.path.join(save_path, lang)
+    if not os.path.exists(save_path_with_lang):
+        os.mkdir(save_path_with_lang)    
+        
+    filename = os.path.join(save_path_with_lang, word)
     with open(filename, 'wb') as file:
         file.write(audio)
 
