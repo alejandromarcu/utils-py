@@ -8,7 +8,8 @@ from tempfile import gettempdir
 import time
 import re
 
-save_path = os.path.join("decime", "audio")
+script_path = os.path.dirname(sys.argv[0])
+save_path = os.path.join(script_path, "audio")
 is_az = re.compile("[a-zA-Z]*")
 
 def get_audio_from_wiktionary(lang, word):
