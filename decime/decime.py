@@ -59,6 +59,7 @@ while True:
         os.mkdir(save_path_with_lang)    
         
     filename = os.path.join(save_path_with_lang, word)
+    filename += '.mp3'
     with open(filename, 'wb') as file:
         file.write(audio)
 
