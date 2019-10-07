@@ -27,9 +27,20 @@ def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, 
 root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 word_to_file = find_files([root])
 
-words = ["sure", "tatter", "Admire"]
+#words = ["sure", "tatter", "Admire"]
+#files = map(lambda w: word_to_file[w.lower()], words)
+#generate(files, "test.mp3")
 
-files = map(lambda w: word_to_file[w.lower()], words)
+def module6():
+    uh = ["cut", "done", "gun", "cup", "enough", "function", "funny", "husband", "love", "money", "month", "other", "oven", "public", "structure", "thump", "under"]
+    ah = ["gone", "cop", "block ", "body ", "bottle ", "bottom", "comment", "constant", "contest ", "document ", "father", "holidays", "impossible ", "job ", "model ", "module ", "occupation ", "october", "operate", "option", "product", "robot", "stock"]
+    aw = [ "caught", "dawn ", "also ", "alternate ", "boss ", "login ", "long ", "often ", "small ", "thought"]
+    words = list(uh)
+    words.extend(ah)
+    words.extend(aw)
 
-generate(files, "test.mp3")
+    files = map(lambda w: word_to_file[w.lower()], words)
+    generate(files, "module6.mp3")
+
+module6()
 
