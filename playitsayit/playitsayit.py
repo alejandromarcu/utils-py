@@ -15,8 +15,11 @@ def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
     return files
 
 
-def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.2, silence_fix=300):
+def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, silence_fix=400, start_fname=None, end_fname=None):
     audio = AudioSegment.empty()
+    if start_fname:
+        audio += AudioSegment.from_file(start_fname)
+
     for file in files:
         orig = AudioSegment.from_file(file)
         silence_duration = len(orig) * silence_mult + silence_fix
@@ -25,6 +28,9 @@ def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.2, 
         for _ in range(repetitions):
             audio += orig
             audio += silence_audio
+
+    if end_fname:
+        audio += AudioSegment.from_file(end_fname)
 
     audio.export(out_fname, format="mp3")
 
@@ -44,9 +50,12 @@ def module6():
     words.extend(ah)
     words.extend(aw)
     shuffle(words)
+    print(", ".join(words))
+
 
     files = map(lambda w: word_to_file[w.lower()], words)
-    generate(files, "module6.mp3", repetitions=4)
+    start_fname, end_fname = word_to_file["startbell"], word_to_file["endbell"]
+    generate(files, "module6.mp3", repetitions=4, start_fname=start_fname, end_fname=end_fname)
 
 module6()
 
