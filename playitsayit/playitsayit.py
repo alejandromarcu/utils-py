@@ -42,6 +42,14 @@ word_to_file = find_files([root, min_pairs])
 #files = map(lambda w: word_to_file[w.lower()], words)
 #generate(files, "test.mp3")
 
+def render_module(words, fname):
+    print(", ".join(words))
+
+    files = map(lambda w: word_to_file[w.lower()], words)
+    start_fname, end_fname = word_to_file["startbell"], word_to_file["endbell"]
+    generate(files, fname, repetitions=4, start_fname=start_fname, end_fname=end_fname)
+
+
 def module6():
     uh = ["cut", "done", "gun", "cup", "enough", "function", "funny", "husband", "love", "money", "month", "other", "oven", "public", "structure", "thump", "under"]
     ah = ["gone", "cop", "block", "body", "bottle", "bottom", "comment", "constant", "contest", "document", "father", "holidays", "impossible", "job", "model", "module", "occupation", "october", "operate", "option", "product", "robot", "stock"]
@@ -50,12 +58,16 @@ def module6():
     words.extend(ah)
     words.extend(aw)
     shuffle(words)
-    print(", ".join(words))
+
+    render_module(words, "module6.mp3")
+
+def module8():
+    words =["action", "active", "actual", "after", "battery", "cash", "chapter", "exact", "fast", "graph", "hacker", "happen", "ration", "task", "track"] # aa 
+    words.extend(["angle", "hang", "thanks", "exam", "man", "stand", "ban", "scam", "band", "ant", "jam", "stand"]) # aa + nasak
+    words.extend(["address", "defend", "empty", "except", "excess", "invest", "preface", "present", "pressure", "pretend", "shelves", "special", "suggest", "unless", "weather", "wednesday", "yellow"]) # eh
+    shuffle(words)
+
+    render_module(words, "module8.mp3")
 
 
-    files = map(lambda w: word_to_file[w.lower()], words)
-    start_fname, end_fname = word_to_file["startbell"], word_to_file["endbell"]
-    generate(files, "module6.mp3", repetitions=4, start_fname=start_fname, end_fname=end_fname)
-
-module6()
-
+module8()
