@@ -12,6 +12,7 @@ def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
         path_files = Path(path).glob("**/*.mp3") if recursive else Path(path).glob("*.mp3")
         files.update({word_from_filename(f.stem):str(f) for f in path_files})
    
+    print("Read", len(files), "words")
     return files
 
 
@@ -38,10 +39,6 @@ root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\minimal pairs"
 word_to_file = find_files([root, min_pairs])
 
-#words = ["sure", "tatter", "Admire"]
-#files = map(lambda w: word_to_file[w.lower()], words)
-#generate(files, "test.mp3")
-
 def render_module(words, fname):
     print(", ".join(words))
 
@@ -62,12 +59,18 @@ def module6():
     render_module(words, "module6.mp3")
 
 def module8():
-    words =["action", "active", "actual", "after", "battery", "cash", "chapter", "exact", "fast", "graph", "hacker", "happen", "ration", "task", "track"] # aa 
+    words = ["action", "active", "actual", "after", "battery", "cash", "chapter", "exact", "fast", "graph", "hacker", "happen", "ration", "task", "track"] # aa 
     words.extend(["angle", "hang", "thanks", "exam", "man", "stand", "ban", "scam", "band", "ant", "jam", "stand"]) # aa + nasak
     words.extend(["address", "defend", "empty", "except", "excess", "invest", "preface", "present", "pressure", "pretend", "shelves", "special", "suggest", "unless", "weather", "wednesday", "yellow"]) # eh
     shuffle(words)
 
     render_module(words, "module8.mp3")
 
+def module9():
+    words = ["beach","busy","cheese","degree","exceed","feel","field","happy","here","peer","repeat","see","sheet","sleep","speed","teacher","wheel"] # ee
+    words.extend(["activity","begin","build","contribute","convince","decision","description","equipment","fill","finish","indicate","internet","limit","list","office","printer","system","window","women"])
+    shuffle(words)
 
-module8()
+    render_module(words, "module9.mp3")
+
+module9()
