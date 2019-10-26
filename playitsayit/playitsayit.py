@@ -39,12 +39,20 @@ root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\minimal pairs"
 word_to_file = find_files([root, min_pairs])
 
-def render_module(words, fname):
+def render_module_with_slow(words, fname, repetitions_slow=2, repetitions=6):
+    all = []
+    for word in words:
+        all.extend([word + "-slow"] * repetitions_slow)
+        all.extend([word] * repetitions)
+
+    render_module(all, fname, repetitions=1)
+
+def render_module(words, fname, repetitions=4):
     print(", ".join(words))
 
     files = map(lambda w: word_to_file[w.lower()], words)
     start_fname, end_fname = word_to_file["startbell"], word_to_file["endbell"]
-    generate(files, fname, repetitions=4, start_fname=start_fname, end_fname=end_fname)
+    generate(files, fname, repetitions=repetitions, start_fname=start_fname, end_fname=end_fname)
 
 
 def module6():
@@ -73,4 +81,8 @@ def module9():
 
     render_module(words, "module9.mp3")
 
-module9()
+def module10():
+    words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "wont"]
+    render_module_with_slow(words, "module10.mp3")
+
+module10()
