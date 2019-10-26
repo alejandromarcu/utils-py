@@ -16,7 +16,7 @@ def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
     return files
 
 
-def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, silence_fix=400, start_fname=None, end_fname=None):
+def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, silence_fix=400, start_fname=None, end_fname=None, tags=None):
     audio = AudioSegment.empty()
     if start_fname:
         audio += AudioSegment.from_file(start_fname)
@@ -33,27 +33,29 @@ def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, 
     if end_fname:
         audio += AudioSegment.from_file(end_fname)
 
-    audio.export(out_fname, format="mp3")
+    audio.export(out_fname, format="mp3", tags=tags)
 
 root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\minimal pairs"
 word_to_file = find_files([root, min_pairs])
 
-def render_module_with_slow(words, fname, repetitions_slow=2, repetitions=6):
+def render_module_with_slow(words, module_number, repetitions_slow=2, repetitions=6):
     print(words)
     all = []
     for word in words:
         all.extend([word + "-slow"] * repetitions_slow)
         all.extend([word] * repetitions)
 
-    render_module(all, fname, repetitions=1)
+    render_module(all, module_number, repetitions=1)
 
-def render_module(words, fname, repetitions=4):
+def render_module(words, module_number, repetitions=4):
     print(", ".join(words))
 
     files = map(lambda w: word_to_file[w.lower()], words)
     start_fname, end_fname = word_to_file["startbell"], word_to_file["endbell"]
-    generate(files, fname, repetitions=repetitions, start_fname=start_fname, end_fname=end_fname)
+    tags = {"title": f"My module {module_number} words", "album": "Rachel's English", "artist": "Rachel's English"}
+    fname = f"module{module_number}.mp3"
+    generate(files, fname, repetitions=repetitions, start_fname=start_fname, end_fname=end_fname, tags=tags)
 
 
 def module6():
@@ -65,7 +67,7 @@ def module6():
     words.extend(aw)
     shuffle(words)
 
-    render_module(words, "module6.mp3")
+    render_module(words, 6)
 
 def module8():
     words = ["action", "active", "actual", "after", "battery", "cash", "chapter", "exact", "fast", "graph", "hacker", "happen", "ration", "task", "track"] # aa 
@@ -73,17 +75,17 @@ def module8():
     words.extend(["address", "defend", "empty", "except", "excess", "invest", "preface", "present", "pressure", "pretend", "shelves", "special", "suggest", "unless", "weather", "wednesday", "yellow"]) # eh
     shuffle(words)
 
-    render_module(words, "module8.mp3")
+    render_module(words, 8)
 
 def module9():
     words = ["beach","busy","cheese","degree","exceed","feel","field","happy","here","peer","repeat","see","sheet","sleep","speed","teacher","wheel"] # ee
     words.extend(["activity","begin","build","contribute","convince","decision","description","equipment","fill","finish","indicate","internet","limit","list","office","printer","system","window","women"])
     shuffle(words)
 
-    render_module(words, "module9.mp3")
+    render_module(words, 9)
 
 def module10():
     words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "total", "wont"]
-    render_module_with_slow(words, "module10.mp3")
+    render_module_with_slow(words, 10)
 
 module10()
