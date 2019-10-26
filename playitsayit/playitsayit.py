@@ -5,7 +5,7 @@ from random import shuffle
 
 def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
     def word_from_filename(fname: str) -> str:
-        return "".join([ch for ch in fname.lower() if ch.isalpha()])
+        return "".join([ch for ch in fname.lower() if ch.isalpha() or ch == '-'])
 
     files = {}
     for path in paths:
@@ -40,6 +40,7 @@ min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\min
 word_to_file = find_files([root, min_pairs])
 
 def render_module_with_slow(words, fname, repetitions_slow=2, repetitions=6):
+    print(words)
     all = []
     for word in words:
         all.extend([word + "-slow"] * repetitions_slow)
@@ -82,7 +83,7 @@ def module9():
     render_module(words, "module9.mp3")
 
 def module10():
-    words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "wont"]
+    words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "total", "wont"]
     render_module_with_slow(words, "module10.mp3")
 
 module10()
