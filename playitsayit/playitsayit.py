@@ -5,7 +5,9 @@ from random import shuffle
 
 def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
     def word_from_filename(fname: str) -> str:
-        return "".join([ch for ch in fname.lower() if ch.isalpha() or ch == '-'])
+        word = "".join([ch for ch in fname.lower() if ch.isalpha() or ch == '-'])
+        # if it starts with -, probably it had a number before, so just remove it
+        return word[1:] if word[0] == "-" else word 
 
     files = {}
     for path in paths:
