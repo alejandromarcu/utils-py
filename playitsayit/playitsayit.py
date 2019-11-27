@@ -39,7 +39,8 @@ def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, 
 
 root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\minimal pairs"
-word_to_file = find_files([root, min_pairs])
+modules = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\modules"
+word_to_file = find_files([root, min_pairs, modules])
 
 def render_module_with_slow(words, module_number, repetitions_slow=2, repetitions=6):
     print(words)
@@ -90,4 +91,19 @@ def module10():
     words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "total", "wont"]
     render_module_with_slow(words, 10)
 
-module10()
+def module19():
+    N = 10
+    words = ["notebook-unstressed", "notebook-stressed"] * N
+    words += ["skateboard-unstressed", "skateboard-stressed"] * N
+    words += ["backbone-unstressed", "backbone-stressed"] * N
+    words += ["touchdown-unstressed", "touchdown-stressed"] * N
+    words += ["weekend-unstressed", "weekend-stressed"] * N
+    words += ["toothpaste-unstressed", "toothpaste-stressed"] * N
+    words += ["download-unstressed", "download-stressed"] * N
+    words += ["bookmark-unstressed", "bookmark-stressed"] * N
+    words += ["lifetime-unstressed", "lifetime-stressed"] * N
+    words += ["headquarters-unstressed", "headquarters-stressed"] * N
+
+    render_module(words, 19, repetitions=1)
+
+module19()
