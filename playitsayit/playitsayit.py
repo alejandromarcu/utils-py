@@ -91,6 +91,13 @@ def module10():
     words = ["alone", "cold", "code", "dont", "go", "home", "hotel", "load", "most", "okay", "only", "open", "over", "so", "total", "wont"]
     render_module_with_slow(words, 10)
 
+def module12():
+    words = ["duty", "flew", "fruit", "influence", "issue", "jewel", "new", "remove", "true", "wound"] # oo
+    words.extend(["amusement", "community", "commute", "confused", "cucumber", "distribute", "February", "January", "utensils", "useful"]) # ew
+    shuffle(words)
+
+    render_module(words, 12)
+
 def module19():
     N = 10
     words = ["notebook-stressed", "notebook-unstressed"] * N
@@ -106,4 +113,4 @@ def module19():
 
     render_module(words, 19, repetitions=1)
 
-module19()
+module12()
