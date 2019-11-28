@@ -93,16 +93,16 @@ def module10():
 
 def module19():
     N = 10
-    words = ["notebook-unstressed", "notebook-stressed"] * N
-    words += ["skateboard-unstressed", "skateboard-stressed"] * N
-    words += ["backbone-unstressed", "backbone-stressed"] * N
-    words += ["touchdown-unstressed", "touchdown-stressed"] * N
-    words += ["weekend-unstressed", "weekend-stressed"] * N
-    words += ["toothpaste-unstressed", "toothpaste-stressed"] * N
-    words += ["download-unstressed", "download-stressed"] * N
-    words += ["bookmark-unstressed", "bookmark-stressed"] * N
-    words += ["lifetime-unstressed", "lifetime-stressed"] * N
-    words += ["headquarters-unstressed", "headquarters-stressed"] * N
+    words = ["notebook-stressed", "notebook-unstressed"] * N
+    words += ["skateboard-stressed", "skateboard-unstressed"] * N
+    words += ["backbone-stressed", "backbone-unstressed"] * N
+    words += ["touchdown-stressed", "touchdown-unstressed"] * N
+    words += ["weekend-stressed", "weekend-unstressed"] * N
+    words += ["toothpaste-stressed", "toothpaste-unstressed"] * N
+    words += ["download-stressed", "download-unstressed"] * N
+    words += ["bookmark-stressed", "bookmark-unstressed"] * N
+    words += ["lifetime-stressed", "lifetime-unstressed"] * N
+    words += ["headquarters-stressed", "headquarters-unstressed"] * N
 
     render_module(words, 19, repetitions=1)
 
