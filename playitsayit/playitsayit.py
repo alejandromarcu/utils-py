@@ -113,4 +113,8 @@ def module19():
 
     render_module(words, 19, repetitions=1)
 
-module12()
+def module20_challenge():
+    words = ["affair", "character", "square", "hear", "clear", "souvenir", "before", "door", "store", "sharp", "yard", "harvest", "computerargumenta", "computerargumentb"]
+    render_module(words, 20, repetitions=6)
+
+module20_challenge()
