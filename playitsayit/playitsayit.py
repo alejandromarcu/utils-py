@@ -3,16 +3,19 @@ from typing import List, Dict
 from pathlib import Path
 from random import shuffle
 
-def find_files(paths: List[str], recursive=True) -> Dict[str, str]:
+def find_files(paths: List[str], recursive=True, word_from_filename_f = None) -> Dict[str, str]:
     def word_from_filename(fname: str) -> str:
         word = "".join([ch for ch in fname.lower() if ch.isalpha() or ch == '-'])
         # if it starts with -, probably it had a number before, so just remove it
         return word[1:] if word[0] == "-" else word 
 
+    if not word_from_filename_f:
+        word_from_filename_f = word_from_filename
+
     files = {}
     for path in paths:
         path_files = Path(path).glob("**/*.mp3") if recursive else Path(path).glob("*.mp3")
-        files.update({word_from_filename(f.stem):str(f) for f in path_files})
+        files.update({word_from_filename_f(f.stem):str(f) for f in path_files})
    
     print("Read", len(files), "words")
     return files
@@ -40,7 +43,8 @@ def generate(files: List[str], out_fname: str, repetitions=3, silence_mult=1.1, 
 root = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\words"
 min_pairs = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\minimal pairs"
 modules = "C:\\Users\\Ale\\OneDrive\\Cucu\\Etc\\English\\Rachel's English\\modules"
-word_to_file = find_files([root, min_pairs, modules])
+word_to_file = find_files([root, min_pairs])
+word_to_file.update(find_files([modules], True, lambda f: f.lower()))
 
 def render_module_with_slow(words, module_number, repetitions_slow=2, repetitions=6):
     print(words)
@@ -60,6 +64,10 @@ def render_module(words, module_number, repetitions=4):
     fname = f"module{module_number}.mp3"
     generate(files, fname, repetitions=repetitions, start_fname=start_fname, end_fname=end_fname, tags=tags)
 
+
+def module5_sentences():
+    s = [f"ph-sa-{i}-audio" for i in range(1,11)]
+    render_module_with_slow(s, 5, 3, 5)
 
 def module6():
     uh = ["cut", "done", "gun", "cup", "enough", "function", "funny", "husband", "love", "money", "month", "other", "oven", "public", "structure", "thump", "under"]
@@ -117,4 +125,4 @@ def module20_challenge():
     words = ["affair", "character", "square", "hear", "clear", "souvenir", "before", "door", "store", "sharp", "yard", "harvest", "computerargumenta", "computerargumentb"]
     render_module(words, 20, repetitions=6)
 
-module20_challenge()
+module5_sentences()
